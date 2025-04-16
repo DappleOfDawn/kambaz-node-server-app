@@ -7,14 +7,15 @@ import CourseRoutes from "./Kambaz/Courses/routes.js";
 import ModuleRoutes from "./Kambaz/Modules/routes.js";
 import session from "express-session";
 import "dotenv/config";
+import mongoose from "mongoose";
 
+const CONNECTION_STRING = process.env.MONGO_CONNECTION_STRING || "mongodb://localhost:27017/kambaz";
+mongoose.connect(CONNECTION_STRING);
 const app = express();
-app.use(
-  cors({
-    credentials: true,
-    origin: process.env.NETLIFY_URL || "http://localhost:3000",
-  })
-);
+app.use(cors({
+  credentials: true,
+  origin: process.env.NETLIFY_URL || "http://localhost:5173",
+}));
 const sessionOptions = {
   secret: process.env.SESSION_SECRET || "kambaz",
   resave: false,
