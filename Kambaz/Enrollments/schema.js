@@ -9,7 +9,7 @@ const enrollmentSchema = new mongoose.Schema(
    enrollmentDate: Date,
    status: {
      type: String,
-     enum: ["ENROLLED", "DROPPED", "COMPLETED"],
+     enum: ["ENROLLED", "DROPPED", "COMPLETED", "CREATED"],
      default: "ENROLLED",
    },
  },

@@ -8,6 +8,7 @@ import ModuleRoutes from "./Kambaz/Modules/routes.js";
 import session from "express-session";
 import "dotenv/config";
 import mongoose from "mongoose";
+import QuizRoutes from "./Kambaz/Quizzes/routes.js";
 
 const CONNECTION_STRING = process.env.MONGO_CONNECTION_STRING || "mongodb://localhost:27017/kambaz";
 mongoose.connect(CONNECTION_STRING);
@@ -37,6 +38,7 @@ app.use(express.json());
 UserRoutes(app);
 CourseRoutes(app);
 ModuleRoutes(app);
+QuizRoutes(app);
 Hello(app);
 Lab5(app);
 app.listen(process.env.PORT || 4000);
