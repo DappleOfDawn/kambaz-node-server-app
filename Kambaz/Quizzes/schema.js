@@ -1,4 +1,36 @@
 import mongoose from "mongoose";
+
+const answerSchema = new mongoose.Schema(
+  {
+    _id: String,
+    question: String,
+    answer: String,
+    correct: Boolean,
+  }
+);
+const Question = new mongoose.Schema(
+  {
+    _id: String,
+    title: String,
+    questionText: String,
+    questionType: {
+      type: String,
+      enum: ["MULTIPLE CHOICE", "TRUE FALSE", "FILL IN THE BLANK"],
+      default: "MULTIPLE CHOICE",
+    },
+    points: Number,
+    answers: [answerSchema],
+  }
+);
+const Submission = new mongoose.Schema(
+  {
+    _id: String,
+    user: { type: String, ref: "UserModel" },
+    answers: [answerSchema],
+    score: Number,
+    submittedOn: Date,
+  }
+);
 const schema = new mongoose.Schema(
   {
     _id: String,
@@ -60,6 +92,8 @@ const schema = new mongoose.Schema(
       type: Boolean,
       default: false,
     },
+    questions: [Question],
+    submissions: [Submission],
   },
   { collection: "quizzes" }
 );
